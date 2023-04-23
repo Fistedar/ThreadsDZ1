@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        List<Thread>threads = new ArrayList<>();
+        List<Thread> threads = new ArrayList<>();
         String[] texts = new String[25];
         for (int i = 0; i < texts.length; i++) {
             texts[i] = generateText("aab", 30_000);
@@ -12,7 +12,7 @@ public class Main {
 
         long startTs = System.currentTimeMillis(); // start time
         for (String text : texts) {
-            threads.add(new Thread(()-> {
+            threads.add(new Thread(() -> {
                 int maxSize = 0;
                 for (int i = 0; i < text.length(); i++) {
                     for (int j = 0; j < text.length(); j++) {
@@ -31,9 +31,10 @@ public class Main {
                         }
                     }
                 }
-                System.out.println(text.substring(0, 100) + " -> " + maxSize);}));
+                System.out.println(text.substring(0, 100) + " -> " + maxSize);
+            }));
         }
-        for (Thread thread : threads){
+        for (Thread thread : threads) {
             thread.start();
         }
         for (Thread thread : threads) {
